@@ -18,6 +18,8 @@ router.get("/auth", auth, (req, res) => {
     lastname: req.user.lastname,
     role: req.user.role,
     image: req.user.image,
+    cart: req.user.cart,
+    history: req.user.history,
   });
 });
 
@@ -73,7 +75,8 @@ router.post("/addToCart", auth, (req, res) => {
   // 먼저 user collection에 해당 유저의 정보를 가져오기
   User.findOne({ _id: req.user._id }, (err, userInfo) => {
     // 가져온 정보에서 카드에다 넣으려 하는 상품이 이미 들어 있는지 확인
-    userInfo.card.forEach((item) => {
+    let duplicate = false;
+    userInfo.cart.forEach((item) => {
       if (item.id === req.body.productId) {
         duplicate = true;
       }
@@ -86,7 +89,7 @@ router.post("/addToCart", auth, (req, res) => {
         { new: true }, // 결과값을 받기위해서 new
         (err, userInfo) => {
           if (err) return res.status(200).json({ success: false, err });
-          res.status(200).send(userInfo.card);
+          res.status(200).send(userInfo.cart);
         }
       );
     }
