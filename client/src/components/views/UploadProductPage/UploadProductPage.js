@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Button, Form, Input } from "antd";
+import { Button, Form, Input } from "antd";
 import FileUplad from "../../utils/FileUpload";
 import Axios from "axios";
 
@@ -66,7 +66,7 @@ function UploadProductPage(props) {
         alert("상품 업로드에 성공 했습니다.");
         props.history.push("/");
       } else {
-        alert("상품 업로드에 실패 했습니다.");  
+        alert("상품 업로드에 실패 했습니다.");
       }
     });
   };
