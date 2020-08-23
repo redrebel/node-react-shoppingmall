@@ -32,5 +32,5 @@ paymentSchema.index(
   }
 );
 
-const Paymemt = mongoose.model("Product", productSchema);
+const Payment = mongoose.model("Payment", paymentSchema);
 module.exports = { Payment };
