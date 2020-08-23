@@ -31,6 +31,7 @@ function RightMenu(props) {
       </Menu>
     );
   } else {
+    console.log(user);
     return (
       <Menu mode={props.mode}>
         <Menu.Item key="upload">
@@ -38,7 +39,7 @@ function RightMenu(props) {
         </Menu.Item>
 
         <Menu.Item key="cart" style={{ paddingBottom: 0 }}>
-          <Badge count={5}>
+          <Badge count={user.userData.cart.length()}>
             <a
               href="/user/cart"
               className="head-example"

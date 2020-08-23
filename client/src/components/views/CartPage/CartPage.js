@@ -47,7 +47,6 @@ function CartPage(props) {
     dispatch(removeCartItem(productId)).then((response) => {
       if (response.payload.productInfo.length <= 0) {
         setShowTotal(false);
-        ShowSuccess(true);
       }
     });
   };
@@ -61,6 +60,7 @@ function CartPage(props) {
     ).then((response) => {
       if (response.payload.success) {
         setShowTotal(false);
+        setShowSuccess(true);
       }
     });
   };

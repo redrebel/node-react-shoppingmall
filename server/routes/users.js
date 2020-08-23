@@ -150,14 +150,15 @@ router.post("/successBuy", auth, (req, res) => {
   //  1. User collection 안에 History 필드 안에 간단한 결제 정보 넣어주기
 
   let history = [];
-
+  console.log(req.body);
   req.body.cartDetail.forEach((item) => {
     history.push({
       dateOfPurchase: Date.now(),
       name: item.title,
       id: item._id,
-      price: item.quantity,
-      paymentId: req.body.paymentData.paymentId,
+      price: item.price,
+      quantity: item.quantity,
+      paymentId: req.body.paymentData.paymentID,
     });
   });
 
@@ -186,7 +187,7 @@ router.post("/successBuy", auth, (req, res) => {
       const payment = new Payment(transactionData);
       payment.save((err, doc) => {
         if (err) return res.json({ success: false, err });
-
+        console.log;
         // 3. Product Collection 안에 있는 sold 필드 정보 업데이트 시켜주기
 
         // 상품 당 몇개의 quantity를 샀는지
@@ -194,7 +195,7 @@ router.post("/successBuy", auth, (req, res) => {
         doc.product.forEach((item) => {
           products.push({ id: item.id, quantity: item.quantity });
         });
-
+        console.log(products);
         async.eachSeries(
           products,
           (item, callback) => {
